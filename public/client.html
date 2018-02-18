@@ -1,0 +1,20 @@
+<html>
+
+<body>
+  <input id='text' />
+  <button id='send-button'>Send message</button>
+  <div id='receiving-area'></div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:9123/ws');
+
+    const receivingArea = document.getElementById('receiving-area');
+    const sendButton = document.getElementById('send-button');
+    const input = document.getElementById('text');
+
+    ws.onmessage = ({ data }) => receivingArea.innerHTML += `${data}<br/>`;
+    sendButton.onclick = () => ws.send(input.value);
+  </script>
+</body>
+
+</html>
